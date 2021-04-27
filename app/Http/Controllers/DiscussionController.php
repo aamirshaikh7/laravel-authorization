@@ -14,7 +14,7 @@ class DiscussionController extends Controller
      */
     public function index()
     {
-        return view('discussions.index');
+        return view('discussions.index', ['discussions' => Discussion::all()]);
     }
 
     /**
