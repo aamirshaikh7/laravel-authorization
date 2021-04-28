@@ -18,7 +18,9 @@
                     {{ $discussion->body }}
                 </div>
 
-                <p>Posted by : {{ $discussion->user->name }}</p>
+                <p class="pb-6">Posted by : {{ $discussion->user->name }}</p>
+
+                @include ('comments.index')
             </div>
         </div>
     </div>
