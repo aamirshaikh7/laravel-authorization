@@ -22,3 +22,4 @@ Route::middleware(['auth:sanctum', 'verified'])->get('/dashboard', function () {
 })->name('dashboard');
 
 Route::middleware(['auth:sanctum', 'verified'])->get('/discussions', 'App\Http\Controllers\DiscussionController@index')->name('discussions.index');
+Route::middleware(['auth:sanctum', 'verified'])->get('/discussions/{discussion}', 'App\Http\Controllers\DiscussionController@show')->name('discussions.show');
