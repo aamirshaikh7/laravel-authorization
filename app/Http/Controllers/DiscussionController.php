@@ -3,6 +3,7 @@
 namespace App\Http\Controllers;
 
 use App\Models\Discussion;
+use App\Models\Comment;
 use Illuminate\Http\Request;
 
 class DiscussionController extends Controller
@@ -46,7 +47,7 @@ class DiscussionController extends Controller
      */
     public function show(Discussion $discussion)
     {
-        return view('discussions.show', ['discussion' => $discussion]);
+        return view('discussions.show', ['discussion' => $discussion, 'comments' => Comment::all()]);
     }
 
     /**

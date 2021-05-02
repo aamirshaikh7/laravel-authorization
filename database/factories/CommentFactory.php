@@ -6,6 +6,7 @@ use App\Models\Comment;
 use Illuminate\Database\Eloquent\Factories\Factory;
 use Illuminate\Support\Str;
 use App\Models\Discussion;
+use App\Models\User;
 
 class CommentFactory extends Factory
 {
@@ -25,6 +26,7 @@ class CommentFactory extends Factory
     {
         return [
             'discussion_id' => Discussion::factory(),
+            'user_id' => User::factory(),
             'body' => $this->faker->paragraph
         ];
     }
