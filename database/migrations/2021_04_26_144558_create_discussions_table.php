@@ -19,7 +19,7 @@ class CreateDiscussionsTable extends Migration
                   ->constrained()
                   ->onDelete('cascade');
             $table->string('title');
-            $table->text('body');
+            $table->text('body')->nullable();
             $table->timestamps();
         });
     }

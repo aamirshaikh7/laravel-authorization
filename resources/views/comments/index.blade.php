@@ -1,6 +1,9 @@
 <div class="antialiased">
     <h3 class="mb-4 text-lg font-semibold text-gray-900">Comments</h3>
-    <div class="space-y-4">            
+    <div class="space-y-4">      
+        <div class="mb-3 pt-0">
+            <input type="text" placeholder="Add a Comment" class="px-3 py-3 placeholder-blueGray-300 text-blueGray-600 relative bg-white bg-white rounded text-sm border-3 shadow outline-none focus:outline-none w-full"/>
+        </div>      
         <div class="flex">
             <div class="flex-1 border rounded-lg px-4 py-2 sm:px-6 sm:py-4 leading-relaxed">
                 @forelse ($discussion->comments as $comment)

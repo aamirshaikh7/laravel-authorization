@@ -36,7 +36,16 @@ class DiscussionController extends Controller
      */
     public function store(Request $request)
     {
-        //
+        $discussion = new Discussion(request()->validate([
+            'title' => 'required | min:1 | max:100',
+            'body' => 'max:255'
+        ]));
+
+        $discussion->user_id = auth()->user()->id;
+
+        $discussion->save();
+
+        return redirect(route('discussions.index'));
     }
 
     /**

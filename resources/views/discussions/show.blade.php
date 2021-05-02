@@ -14,11 +14,13 @@
 
                 <h1 class="pb-3">{{ $discussion->title }}</h1>
 
-                <div class="pb-3">
-                    {{ $discussion->body }}
-                </div>
+                @if ($discussion->body)
+                    <div class="pb-3">
+                        {{ $discussion->body }}
+                    </div>
+                @endif
 
-                <p class="pb-6">Posted by : {{ $discussion->user->name }}</p>
+                <p class="pt-3 pb-6">Posted by : {{ $discussion->user->name }}</p>
 
                 @include ('comments.index')
             </div>
