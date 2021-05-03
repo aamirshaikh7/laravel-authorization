@@ -49,6 +49,27 @@ class DiscussionController extends Controller
     }
 
     /**
+     * Store a newly created resource in storage.
+     *
+     * @param  \Illuminate\Http\Request  $request
+     * @return \Illuminate\Http\Response
+     */
+    public function storeComment(Request $request, Discussion $discussion)
+    {
+        $comment = new Comment(request()->validate([
+            'body' => 'required | max: 255'
+        ]));
+
+        $comment->discussion_id = $discussion->id;
+
+        $comment->user_id = auth()->user()->id;
+
+        $comment->save();
+
+        return redirect(route('discussions.show', $discussion));
+    }
+
+    /**
      * Display the specified resource.
      *
      * @param  \App\Models\Discussion  $discussion

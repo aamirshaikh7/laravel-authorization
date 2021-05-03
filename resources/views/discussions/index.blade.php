@@ -17,7 +17,7 @@
                         @error ('title')
                             <div class="pt-2" role="alert">
                                 <div class="border border-3 border-red-400 rounded-b bg-red-100 px-4 py-3 text-red-700">
-                                <p>{{ $errors->first('title') }}</p>
+                                    <p>{{ $errors->first('title') }}</p>
                                 </div>
                             </div>
                         @enderror

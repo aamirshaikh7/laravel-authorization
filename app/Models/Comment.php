@@ -11,6 +11,8 @@ class Comment extends Model
 {
     use HasFactory;
 
+    protected $fillable = ['body'];
+
     public function discussion () {
         return $this->belongsTo(Discussion::class);
     }
