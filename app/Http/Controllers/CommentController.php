@@ -3,6 +3,7 @@
 namespace App\Http\Controllers;
 
 use App\Models\Comment;
+use App\Models\Discussion;
 use Illuminate\Http\Request;
 
 class CommentController extends Controller
@@ -33,9 +34,19 @@ class CommentController extends Controller
      * @param  \Illuminate\Http\Request  $request
      * @return \Illuminate\Http\Response
      */
-    public function store(Request $request)
+    public function store(Request $request, Discussion $discussion)
     {
-        //
+        $comment = new Comment(request()->validate([
+            'body' => 'required | max: 255'
+        ]));
+
+        $comment->discussion_id = $discussion->id;
+
+        $comment->user_id = auth()->user()->id;
+
+        $comment->save();
+
+        return redirect(route('discussions.show', $discussion));
     }
 
     /**

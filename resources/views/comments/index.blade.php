@@ -1,7 +1,7 @@
 <div class="antialiased">
     <h3 class="mb-4 text-lg font-semibold text-gray-900">Comments</h3>
     <div class="space-y-4">    
-        <form method="POST" action="{{ route('discussions.storeComment', $discussion) }}">
+        <form method="POST" action="{{ route('comment.store', $discussion) }}">
             @csrf
 
             <div class="mb-2 pt-0">
@@ -23,14 +23,28 @@
                 @forelse ($discussion->comments as $comment)
                     <div class="py-4">
                         <strong>
-                            @if ($comment->user->name == $comment->discussion->user->name)
-                                {{ $comment->user->name }} <span class="text-xs pl-2 text-gray-400">Author</span>
-                            @else
-                                {{ $comment->user->name }}
+                            {{ $comment->user->name }} 
+                            @if ($comment->user->name === $comment->discussion->user->name)
+                                <span class="text-xs pl-2 text-gray-400">Author</span>
+                            @endif
+                            
+                            @if ($discussion->best_comment_id === $comment->id)
+                                <span class="text-xs pl-2 text-green-400">Best Comment</span>
                             @endif
                         </strong> <span class="text-xs pl-2 text-gray-400">{{ Carbon\Carbon::parse($comment->created_at)->diffForHumans() }}</span>
                         <p class="text-sm">
                             {{ $comment->body }}
+                            @can ('mark-as-best-comment', $discussion)
+                                @if ($discussion->best_comment_id !== $comment->id)
+                                    <form method="POST" action="{{ route('best.store', $comment) }}">
+                                        @csrf
+
+                                        <button style="margin-left: auto" type="submit" class="flex bg-green-500 hover:bg-green-700 text-white font-bold py-2 px-4 border border-green-700 rounded">
+                                            Mark as Best Comment
+                                        </button>
+                                    </form>
+                                @endif
+                            @endcan
                         </p>
                     </div>
                 @continue ($loop->last)    

@@ -22,6 +22,11 @@ Route::middleware(['auth:sanctum', 'verified'])->get('/dashboard', function () {
 })->name('dashboard');
 
 Route::middleware(['auth:sanctum', 'verified'])->get('/discussions', 'App\Http\Controllers\DiscussionController@index')->name('discussions.index');
+
 Route::middleware(['auth:sanctum', 'verified'])->get('/discussions/{discussion}', 'App\Http\Controllers\DiscussionController@show')->name('discussions.show');
+
 Route::middleware(['auth:sanctum', 'verified'])->post('/discussions', 'App\Http\Controllers\DiscussionController@store')->name('discussions.store');
-Route::middleware(['auth:sanctum', 'verified'])->post('/discussions/{discussion}', 'App\Http\Controllers\DiscussionController@storeComment')->name('discussions.storeComment');
+
+Route::middleware(['auth:sanctum', 'verified'])->post('/discussions/{discussion}', 'App\Http\Controllers\CommentController@store')->name('comment.store');
+
+Route::middleware(['auth:sanctum', 'verified'])->post('/discussions/{comment}/best', 'App\Http\Controllers\DiscussionBestCommentController@store')->name('best.store');

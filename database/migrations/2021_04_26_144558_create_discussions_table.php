@@ -20,6 +20,7 @@ class CreateDiscussionsTable extends Migration
                   ->onDelete('cascade');
             $table->string('title');
             $table->text('body')->nullable();
+            $table->unsignedBigInteger('best_comment_id')->nullable();
             $table->timestamps();
         });
     }
