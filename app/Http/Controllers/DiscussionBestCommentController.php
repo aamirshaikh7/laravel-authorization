@@ -16,4 +16,14 @@ class DiscussionBestCommentController extends Controller
 
         return back();
     }
+
+    public function unmark (Request $request, Comment $comment) {
+        $this->authorize('mark-as-best-comment', $comment->discussion);
+        
+        $comment->discussion->best_comment_id = null;
+
+        $comment->discussion->save();
+
+        return back();
+    }
 }

@@ -29,7 +29,7 @@
                             @endif
                             
                             @if ($discussion->best_comment_id === $comment->id)
-                                <span class="text-xs pl-2 text-green-400">Best Comment</span>
+                                <span class="text-xs pl-2 text-green-500">Best Comment</span>
                             @endif
                         </strong> <span class="text-xs pl-2 text-gray-400">{{ Carbon\Carbon::parse($comment->created_at)->diffForHumans() }}</span>
                         <p class="text-sm">
@@ -41,6 +41,14 @@
 
                                         <button style="margin-left: auto" type="submit" class="flex bg-green-500 hover:bg-green-700 text-white font-bold py-2 px-4 border border-green-700 rounded">
                                             Mark as Best Comment
+                                        </button>
+                                    </form>
+                                @else
+                                    <form method="POST" action="{{ route('best.unmark', $comment) }}"">
+                                        @csrf
+
+                                        <button style="margin-left: auto" type="submit" class="flex bg-red-500 hover:bg-red-700 text-white font-bold py-2 px-4 border border-red-700 rounded">
+                                            Unmark
                                         </button>
                                     </form>
                                 @endif

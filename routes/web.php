@@ -30,3 +30,5 @@ Route::middleware(['auth:sanctum', 'verified'])->post('/discussions', 'App\Http\
 Route::middleware(['auth:sanctum', 'verified'])->post('/discussions/{discussion}', 'App\Http\Controllers\CommentController@store')->name('comment.store');
 
 Route::middleware(['auth:sanctum', 'verified'])->post('/discussions/{comment}/best', 'App\Http\Controllers\DiscussionBestCommentController@store')->name('best.store');
+
+Route::middleware(['auth:sanctum', 'verified'])->post('/discussions/{comment}/best/unmark', 'App\Http\Controllers\DiscussionBestCommentController@unmark')->name('best.unmark');
