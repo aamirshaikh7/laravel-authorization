@@ -24,18 +24,18 @@
                     <div class="py-4">
                         <strong>
                             {{ $comment->user->name }} 
-                            @if ($comment->user->name === $comment->discussion->user->name)
+                            @if ($comment->isAuthor())
                                 <span class="text-xs pl-2 text-gray-400">Author</span>
                             @endif
                             
-                            @if ($discussion->best_comment_id === $comment->id)
+                            @if ($comment->isBestComment())
                                 <span class="text-xs pl-2 text-green-500">Best Comment</span>
                             @endif
                         </strong> <span class="text-xs pl-2 text-gray-400">{{ Carbon\Carbon::parse($comment->created_at)->diffForHumans() }}</span>
                         <p class="text-sm">
                             {{ $comment->body }}
                             @can ('markAsBestComment', $discussion)
-                                @if ($discussion->best_comment_id !== $comment->id)
+                                @if ($comment->showMarkAsBestComment())
                                     <form method="POST" action="{{ route('best.store', $comment) }}">
                                         @csrf
 

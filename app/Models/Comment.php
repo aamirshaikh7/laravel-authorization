@@ -13,8 +13,16 @@ class Comment extends Model
 
     protected $fillable = ['body'];
 
+    public function isAuthor () {
+        return $this->user->name === $this->discussion->user->name;
+    }
+
     public function isBestComment () {
         return $this->discussion->best_comment_id === $this->id;
+    }
+
+    public function showMarkAsBestComment () {
+        return $this->discussion->best_comment_id !== $this->id;
     }
 
     public function discussion () {
