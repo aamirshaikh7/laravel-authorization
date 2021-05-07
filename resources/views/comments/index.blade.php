@@ -34,7 +34,7 @@
                         </strong> <span class="text-xs pl-2 text-gray-400">{{ Carbon\Carbon::parse($comment->created_at)->diffForHumans() }}</span>
                         <p class="text-sm">
                             {{ $comment->body }}
-                            @can ('mark-as-best-comment', $discussion)
+                            @can ('markAsBestComment', $discussion)
                                 @if ($discussion->best_comment_id !== $comment->id)
                                     <form method="POST" action="{{ route('best.store', $comment) }}">
                                         @csrf

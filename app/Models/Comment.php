@@ -13,6 +13,10 @@ class Comment extends Model
 
     protected $fillable = ['body'];
 
+    public function isBestComment () {
+        return $this->discussion->best_comment_id === $this->id;
+    }
+
     public function discussion () {
         return $this->belongsTo(Discussion::class);
     }

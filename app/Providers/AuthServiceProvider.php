@@ -29,8 +29,8 @@ class AuthServiceProvider extends ServiceProvider
     {
         $this->registerPolicies();
 
-        Gate::define('mark-as-best-comment', function (User $user, Discussion $discussion) {
-            return $discussion->user->is($user);
-        });
+        // Gate::define('markAsBestComment', function (User $user, Discussion $discussion) {
+        //     return $discussion->user->is($user);
+        // });
     }
 }

@@ -8,22 +8,30 @@ use Illuminate\Http\Request;
 class DiscussionBestCommentController extends Controller
 {
     public function store (Request $request, Comment $comment) {
-        $this->authorize('mark-as-best-comment', $comment->discussion);
+        $discussion = $this->authorizeUserAndDiscussion($comment);
         
-        $comment->discussion->best_comment_id = $comment->id;
+        $discussion->best_comment_id = $comment->id;
 
-        $comment->discussion->save();
+        $discussion->save();
 
         return back();
     }
 
     public function unmark (Request $request, Comment $comment) {
-        $this->authorize('mark-as-best-comment', $comment->discussion);
+        $discussion = $this->authorizeUserAndDiscussion($comment);
         
-        $comment->discussion->best_comment_id = null;
+        $discussion->best_comment_id = null;
 
-        $comment->discussion->save();
+        $discussion->save();
 
         return back();
+    }
+
+    public function authorizeUserAndDiscussion (Comment $comment) {
+        $discussion = $comment->discussion;
+
+        $this->authorize('markAsBestComment', $discussion);
+        
+        return $discussion;
     }
 }
