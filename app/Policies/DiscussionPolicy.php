@@ -10,38 +10,10 @@ class DiscussionPolicy
 {
     use HandlesAuthorization;
 
-    /**
-     * Determine whether the user can view any models.
-     *
-     * @param  \App\Models\User  $user
-     * @return mixed
-     */
-    public function viewAny(User $user)
-    {
-        //
-    }
-
-    /**
-     * Determine whether the user can view the model.
-     *
-     * @param  \App\Models\User  $user
-     * @param  \App\Models\Discussion  $discussion
-     * @return mixed
-     */
-    public function view(User $user, Discussion $discussion)
-    {
-        //
-    }
-
-    /**
-     * Determine whether the user can create models.
-     *
-     * @param  \App\Models\User  $user
-     * @return mixed
-     */
-    public function create(User $user)
-    {
-        //
+    public function before (User $user) {
+        if ($user->isAdmin()) {
+            return true;
+        }
     }
 
     /**
@@ -54,41 +26,5 @@ class DiscussionPolicy
     public function markAsBestComment(User $user, Discussion $discussion)
     {
         return $discussion->user->is($user);
-    }
-
-    /**
-     * Determine whether the user can delete the model.
-     *
-     * @param  \App\Models\User  $user
-     * @param  \App\Models\Discussion  $discussion
-     * @return mixed
-     */
-    public function delete(User $user, Discussion $discussion)
-    {
-        //
-    }
-
-    /**
-     * Determine whether the user can restore the model.
-     *
-     * @param  \App\Models\User  $user
-     * @param  \App\Models\Discussion  $discussion
-     * @return mixed
-     */
-    public function restore(User $user, Discussion $discussion)
-    {
-        //
-    }
-
-    /**
-     * Determine whether the user can permanently delete the model.
-     *
-     * @param  \App\Models\User  $user
-     * @param  \App\Models\Discussion  $discussion
-     * @return mixed
-     */
-    public function forceDelete(User $user, Discussion $discussion)
-    {
-        //
     }
 }

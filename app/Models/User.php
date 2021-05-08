@@ -61,6 +61,10 @@ class User extends Authenticatable
         'profile_photo_url',
     ];
 
+    public function isAdmin () {
+        return $this->admin;
+    }
+
     public function discussions () {
         return $this->hasMany(Discussion::class);
     }

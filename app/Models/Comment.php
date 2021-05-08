@@ -12,6 +12,10 @@ class Comment extends Model
     use HasFactory;
 
     protected $fillable = ['body'];
+    
+    public function isAdmin () {
+        return $this->user->admin;
+    }
 
     public function isAuthor () {
         return $this->user->name === $this->discussion->user->name;

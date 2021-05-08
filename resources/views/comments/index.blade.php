@@ -23,7 +23,11 @@
                 @forelse ($discussion->comments as $comment)
                     <div class="py-4">
                         <strong>
-                            {{ $comment->user->name }} 
+                            {{ $comment->user->name }}
+                            @if ($comment->isAdmin())
+                                <span class="text-xs pl-2 text-blue-500">Admin</span>
+                            @endif
+                             
                             @if ($comment->isAuthor())
                                 <span class="text-xs pl-2 text-gray-400">Author</span>
                             @endif
