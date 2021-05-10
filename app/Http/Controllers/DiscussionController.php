@@ -15,7 +15,7 @@ class DiscussionController extends Controller
      */
     public function index()
     {
-        return view('discussions.index', ['discussions' => Discussion::all()]);
+        return view('discussions.index', ['discussions' => Discussion::all()->sortByDesc('created_at')]);
     }
 
     /**
@@ -56,6 +56,8 @@ class DiscussionController extends Controller
      */
     public function show(Discussion $discussion)
     {
+        $this->authorize('view', $discussion);
+        
         return view('discussions.show', ['discussion' => $discussion, 'comments' => Comment::all()]);
     }
 

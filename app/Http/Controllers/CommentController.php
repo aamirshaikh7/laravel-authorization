@@ -5,6 +5,8 @@ namespace App\Http\Controllers;
 use App\Models\Comment;
 use App\Models\Discussion;
 use Illuminate\Http\Request;
+use Illuminate\Support\Facades\Notification;
+use App\Notifications\CommentReceived;
 
 class CommentController extends Controller
 {
@@ -45,6 +47,10 @@ class CommentController extends Controller
         $comment->user_id = auth()->user()->id;
 
         $comment->save();
+
+        if (! $comment->isAuthor()) {
+            Notification::send($discussion->user, new CommentReceived($comment));
+        }
 
         return redirect(route('discussions.show', $discussion));
     }

@@ -27,4 +27,8 @@ class DiscussionPolicy
     {
         return $discussion->user->is($user);
     }
+
+    public function view(User $user, Discussion $discussion) {
+        return $discussion->user->is($user);
+    }
 }
